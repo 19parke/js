@@ -1,0 +1,11 @@
+section.container{
+    margin: 0 auto;
+    /* width: 1263px; */
+    width:2880px;
+    overflow: hidden;
+}
+
+div.banner{
+    display:flex;
+    width: 23040px; /*7개 , 2880*(7+1)*/
+}

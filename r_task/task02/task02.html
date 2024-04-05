@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=
+    , initial-scale=1.0">
+    <title>종합 실습 02 - posts</title>
+    <style>
+        table{
+            width:800px;
+            margin:0 auto;
+            border: 1px solid gray;
+            border-collapse: collapse;
+        }
+        td, th {
+            border: 1px solid gray;
+        }
+    </style>
+</head>
+<body>
+    <button>데이터 가져오기</button>
+    <table class="post-table">
+        <thead>
+            <tr>
+                <th>userId</th>
+                <th>id</th>
+                <th>title</th>
+                <th>body</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</body>
+<script src="service02.js"></script>
+<script src="layout02.js"></script>
+<script>
+    // button 가져오기
+    const button = document.querySelector("button");
+    // click했을 때 어떤 행동이 실행되기를 원하는지 하나의 함수로 만들기
+    const buttonClickEvent = (e)=>{
+        postService.getAll(postLayout.showPostList);
+    };
+    // 버튼에 event를 추가하여 클릭했을 때 실행할 함수 적기(buttonClickEvent) 
+    button.addEventListener("click", buttonClickEvent);
+
+</script>
+</html>

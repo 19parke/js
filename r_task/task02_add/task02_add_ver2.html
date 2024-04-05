@@ -1,0 +1,73 @@
+<!--task02.html 모듈화 후-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>종합 실습 02</title>
+    <style>
+        table {
+            width: 800px;
+            margin: 0 auto;
+            border: 1px solid gray;
+            border-collapse: collapse;
+        }
+
+        td, th {
+            border: 1px solid gray;
+        }
+    </style>
+</head>
+<body>
+    <button>데이터 가져오기</button>
+    <div>
+        <form action="" name="post-form" style="text-align: center;">
+            <input type="hidden" name="userId" value="2">
+            <input type="text" name="title" placeholder="제목">
+            <textarea name="body" cols="20" rows="5"></textarea>
+            <button type="button" id="done">완료</button>
+        </form>
+    </div>
+    <table class="post-table">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>title</th>
+            </tr>
+        <thead>
+        <tbody></tbody>
+    </table>
+</body>
+<script src="service02.js"></script>
+<script src="layout02.js"></script>
+<script>
+    const button = document.querySelector("button");
+    const doneButton = document.getElementById("done");
+    const postForm = document['post-form']
+
+    const doneButtonClickEvent = async (e) => {
+        const userId = postForm.userId.value;
+        const title = postForm.title.value;
+        const body = postForm.body.value;
+
+        const post = {
+            userId: userId,
+            title: title,
+            body: body
+        }
+
+        await postService.create(post);
+        await postService.findAll(postLayout.showList);
+    }
+
+    doneButton.addEventListener("click", doneButtonClickEvent);
+
+    const buttonClickEvent = (e) => {
+        postService.findAll(postLayout.showList);
+    }
+
+    // 리팩토링
+    button.addEventListener("click", buttonClickEvent);
+</script>
+</html>

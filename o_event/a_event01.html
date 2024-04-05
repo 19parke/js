@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>클릭 이벤트</title>
+</head>
+<body>
+    <h3>CSS 스타일 동적 변경</h3>
+    <hr>
+    <p>변경될 요소</p>
+    <input type="button" value="스타일 변경">
+</body>
+<script>
+    // class는. , id는 # 속성들은 정해져 있지만 나머지는 X
+    // 그래서 대괄호를 사용 
+    const input = document.querySelector("input[type=button]");
+    const target = document.querySelector("p");
+
+    // input.onclick = () =>{
+    //     console.log("앗 눌렸어!");
+    // }
+// but 사용하지 않음
+
+    // 구조 : 첫번째 문자열, 두번째 callback함수
+    // 문자열 - on을 제외한 나머지 event 이름
+    input.addEventListener("click", (e)=>{
+        // 이벤트가 발생한 객체
+        // input에서 불러온 애 event객체에 모든 정보가 다 담겨져 있다
+        // e.target 누가 이 input 태그를 클릭했는가, 어디서 발생했는지
+
+        // console.log("안녕")
+        // 반복되는 객체 한 번 만 쓰기
+        // with(target.style){
+        //     fonSize = "30px";
+        //     border = "3px dashed magneta";
+                // ...
+        // }
+        target.style.fontSize = "30px";
+        target.style.border = "3px dashed magneta";
+        target.style.width = "100px";
+        target.style.textAlign = "center";
+    });
+
+</script>
+</html>

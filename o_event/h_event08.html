@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이벤트 위임</title>
+    <style>
+        /* 클래스 이름을 나열해서 쓰면, &&연산이다. */
+        div.child1.on {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="container" style="height: 400px;"></div>
+</body>
+<script>
+    const container = document.getElementById("container");
+    container.innerHTML = `<div class='child1'>이벤트 위임1</div>`;
+    container.innerHTML += `<div class='child2'>이벤트 위임2</div>`;
+    
+
+    container.addEventListener("click", (e) => {
+        // 여러 개의 클래스 이름 중, 원하는 이름을 검사할 때에는
+        // classList에 있는 contains()를 활용한다.
+        if(e.target.classList.contains('child1')){
+            // e.target.classList.add("on")
+            // e.target.classList.remove("on")
+            e.target.classList.toggle("on");
+        }
+    });
+</script>
+</html>

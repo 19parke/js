@@ -1,0 +1,49 @@
+section.container{
+    position:relative; /*화살표의 위치 선정과 화면을 커졌다 작아졌다 할 때 상대적 위치 중요*/
+    margin: 0 auto;
+    width: 2880px;
+    overflow: hidden;
+}
+
+div.mainBanner{
+    display:flex;
+    width: 48960px; /*하나 더 추가한 값을 나중에 계산, 2880*(15+1)px*/
+}
+
+div.arrow{
+    font-weight: bold;
+    font-size: 2.3rem;
+    color: #0000004d;
+    line-height: 71.5px;
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    border: 4px solid #0000004d;
+    border-radius: 50%;
+    z-index: 1;
+    text-align: center;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+div.left{
+    left:20px;
+}
+
+div.right{
+    right:20px;
+}
+
+div.buttons{
+    width: 3010px;
+    position: absolute;
+    bottom: 10px;
+    text-align: center;
+}
+
+div.buttons button{
+    border-radius:50%;
+    width:15px;
+    height: 15px;
+}

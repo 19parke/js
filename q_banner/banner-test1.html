@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>배너 실습</title>
+        <link rel="stylesheet" href="banner-test1.css" />
+    </head>
+    <body>
+        <section class="container">
+            <div class="arrow left">&lt;</div>
+            <div class="mainBanner">
+                <div>
+                    <img
+                        src="https://image.ohou.se/i/bucketplace-v2-development/uploads/store/banners/store_home_banners/171048474628827505.png?w=3840"
+                    />
+                </div>
+                <div>
+                    <img
+                        src="https://image.ohou.se/i/bucketplace-v2-development/uploads/store/banners/store_home_banners/171048493055335153.png?w=3840"
+                    />
+                </div>
+                <div>
+                    <img
+                        src="https://image.ohou.se/i/bucketplace-v2-development/uploads/store/banners/store_home_banners/171048500691752902.png?w=3840"
+                    />
+                </div>
+                <div>
+                    <img
+                        src="https://image.ohou.se/i/bucketplace-v2-development/uploads/store/banners/store_home_banners/171048612923329913.png?w=3840"
+                    />
+                </div>
+                <div>
+                    <img
+                        src="https://image.ohou.se/i/bucketplace-v2-development/uploads/store/banners/store_home_banners/171048623240049816.png?w=3840"
+                    />
+                </div>
+                <div>
+                    <img
+                        src="https://image.ohou.se/i/bucketplace-v2-development/uploads/store/banners/store_home_banners/171048632990537576.png?w=3840"
+                    />
+                </div>
+                <div>
+                    <img
+                        src="https://image.ohou.se/i/bucketplace-v2-development/uploads/store/banners/store_home_banners/171048638017688147.png?w=3840"
+                    />
+                </div>
+                <div>
+                    <img
+                        src="https://image.ohou.se/i/bucketplace-v2-development/uploads/store/banners/store_home_banners/171049217643194405.png?w=3840"
+                    />
+                </div>
+                <div>
+                    <img
+                        src="https://image.ohou.se/i/bucketplace-v2-development/uploads/store/banners/store_home_banners/171048652501515651.png?w=3840"
+                    />
+                </div>
+                <div>
+                    <img
+                        src="https://image.ohou.se/i/bucketplace-v2-development/uploads/store/banners/store_home_banners/171048661107895520.png?w=3840"
+                    />
+                </div>
+                <div>
+                    <img
+                        src="https://image.ohou.se/i/bucketplace-v2-development/uploads/store/banners/store_home_banners/171048991302662099.png?w=3840"
+                    />
+                </div>
+                <div>
+                    <img
+                        src="https://image.ohou.se/i/bucketplace-v2-development/uploads/store/banners/store_home_banners/171048690801923658.png?w=3840"
+                    />
+                </div>
+                <div>
+                    <img
+                        src="https://image.ohou.se/i/bucketplace-v2-development/uploads/store/banners/store_home_banners/171048712695352183.png?w=3840"
+                    />
+                </div>
+                <div>
+                    <img
+                        src="https://image.ohou.se/i/bucketplace-v2-development/uploads/store/banners/store_home_banners/171048721114525442.jpg?w=3840"
+                    />
+                </div>
+                <div>
+                    <img
+                        src="https://image.ohou.se/i/bucketplace-v2-development/uploads/store/banners/store_home_banners/171048733582190540.png?w=3840"
+                    />
+                </div>
+            </div>
+            <div class="arrow right">&gt;</div>
+            <div class="buttons">
+                <button></button>
+                <button></button>
+                <button></button>
+                <button></button>
+                <button></button>
+                <button></button>
+                <button></button>
+                <button></button>
+                <button></button>
+                <button></button>
+                <button></button>
+                <button></button>
+                <button></button>
+                <button></button>
+                <button></button>
+            </div>
+        </section>
+    </body>
+    <script>
+        const firstBanner = document.createElement("div");
+        const lastBanner = document.createElement("div");
+        const banner = document.querySelector("div.mainBanner");
+        const buttons = document.querySelectorAll("div.buttons button");
+
+        let count = 0;
+        let temp = buttons[0];
+        temp.style.backgroundColor = "black";
+
+        lastBanner.innerHTML = `<img src="https://image.ohou.se/i/bucketplace-v2-development/uploads/store/banners/store_home_banners/171048474628827505.png?w=3840">`;
+        banner.appendChild(lastBanner);
+
+        firstBanner.innerHTML = `<img src="https://image.ohou.se/i/bucketplace-v2-development/uploads/store/banners/store_home_banners/171048733582190540.png?w=3840">`;
+        banner.insertBefore(
+            firstBanner,
+            document.querySelector("div.mainBanner div")
+        );
+        banner.style.transform = `translate(-2880px)`;
+
+        const autoSlide = () => {
+            // 실행할 코드
+            count++;
+            banner.style.transition = `transform 0.5s`;
+            banner.style.transform = `translate(${-2880 * (count + 1)}px)`;
+
+            // 총 15개에 + 1 16개 index는 0~15
+            if (count === 15) {
+                // 어떤 코드를 바로 실행하지 않고 일정 시간 기다린 후 실행해야하는 경우
+                setTimeout(() => {
+                    // 실행할 코드
+                    banner.style.transition = `transform 0s`;
+                    banner.style.transform = `translate(-2880px)`;
+                }, 500); //지연 시간을 밀리초(ms)
+                count = 0;
+            }
+
+            temp.style.backgroundColor = "#fff";
+            buttons[count].style.background = "black";
+            temp = buttons[count];
+        };
+
+        // 어떤 코드를 일정한 시간 간격을 두고 반복해서 실행, 그리고 그것에 대한 반환값 id
+        let id = setInterval(autoSlide, 3000); //3000 : (3초) 반복주기
+
+        // 이전, 다음 버튼
+        const arrows = document.querySelectorAll("div.arrow");
+
+        let arrowButtonCheck = true;
+        arrows.forEach((arrow) => {
+            arrow.addEventListener("click", (e) => {
+                if (arrowButtonCheck) {
+                    arrowButtonCheck = false;
+                    clearInterval(id);
+                    // 왼쪽 버튼
+                    let arrowType = arrow.classList[1];
+                    if (arrowType === "left") {
+                        count--;
+                        banner.style.transition = `transform 0.5s`;
+                        banner.style.transform = `translate(${
+                            -2880 * (count + 1)
+                        }px)`;
+
+                        if (count === -1) {
+                            setTimeout(() => {
+                                banner.style.transition = `transform 0s`;
+                                banner.style.transform = `translate(-43200px)`;
+                            }, 500);
+                            count = 14;
+                        }
+                    } else {
+                        // 오른쪽 버튼
+                        count++; //오른쪽으로 가니까 +
+                        banner.style.transition = `transform 0.5s`;
+                        banner.style.transform = `translate(${
+                            -2880 * (count + 1)
+                        }px)`;
+
+                        if (count === 15) {
+                            setTimeout(() => {
+                                banner.style.transition = `transform 0s`;
+                                banner.style.transform = `translate(-2880px)`;
+                            }, 500);
+                            count = 0;
+                        }
+                    }
+
+                    temp.style.backgroundColor = "#fff";
+                    buttons[count].style.background = "black";
+                    temp = buttons[count];
+
+                    id = setInterval(autoSlide, 3000);
+
+                    setTimeout(() => {
+                        arrowButtonCheck = true;
+                    }, 500);
+                }
+            });
+        });
+
+        // 버튼
+        let buttonCheck = true;
+        buttons.forEach((button, i) => {
+            button.addEventListener("click", (e) => {
+                if (buttonCheck) {
+                    buttonCheck = false;
+                    clearInterval(id);
+
+                    count = i;
+                    temp.style.backgroundColor = "#fff";
+
+                    buttons[count].style.background = "black";
+                    banner.style.transition = "transform 0.5s";
+                    banner.style.transform = `translate(${
+                        -2880 * (count + 1)
+                    }px)`;
+                    temp = buttons[count];
+
+                    id = setInterval(autoSlide, 2000);
+
+                    setTimeout(() => {
+                        buttonCheck = true;
+                    }, 500);
+                }
+            });
+        });
+    </script>
+</html>

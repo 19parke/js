@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마우스 이벤트 실습</title>
+    <style>
+        #container{
+            padding:50px;
+            background: brown;
+        }
+
+        #container p {
+            background-color: burlywood;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <p id="p">잘가!</p>
+    </div>
+</body>
+<script>
+    const container = document.getElementById("container");
+    const p = document.getElementById("p");
+    // div 태그에 마우스를 올리면 
+    container.addEventListener("mouseenter", (e)=>{
+        // console.log(e.target);
+        // p태그의 내용이 "안녕!"으로 바뀌고
+        p.innerText = "안녕!";
+    })
+    // 마우스를 떼면 "잘가!"로 바뀌게 된다.
+    container.addEventListener("mouseleave", (e)=>{
+        p.innerText = "잘가!";
+    })
+
+    /*
+    [ 내가 잘못 찾은 부분 ]
+    노드 탐색과 요소 탐색은 다르다
+
+    dom은 node의 계층 구조로 이루어져 있습니다.
+    따라서, node에는 element, text, comment 등 여러 항목이 포함되어 있다는 것에 주의하세요.
+
+    node에는 텍스트, element, 주석 등 여러 타입이 있는데,
+    element는 여러 node 타입 중 한 종류입니다.
+    element는 <p>, <div>, <a>와 같은 태그를 사용해서 작성된 노드입니다.
+    출처: https://hianna.tistory.com/712 [어제 오늘 내일:티스토리]
+
+    ==> 전체 객체를 가져오려면 firstElementChild 이런식으로 Element가 붙은 형식 
+    */
+///////////////////////////////////////////myAnswer
+
+    // div 태그에 마우스를 올리면 p태그의 내용이 "안녕!"으로 바뀌고
+    // 마우스를 떼면 "잘가!"로 바뀌게 한다.
+    // const container = document.getElementById("container");
+    // const p = document.querySelector("#container p");
+    
+    // container.addEventListener("mouseenter", (e) => {
+        // e.target.firstElementChild.innerText = "안녕!";
+        // p.innerText = "안녕!";
+    // });
+
+    // container.addEventListener("mouseleave", (e) => {
+    //     e.target.firstElementChild.innerText = "잘가!";
+    // })
+
+
+</script>
+</html>

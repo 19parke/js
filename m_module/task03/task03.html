@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TASK03</title>
+</head>
+<body>
+    <button>TO-DO LIST</button>
+</body>
+<script src="service03.js"></script>
+<script src="layout03.js"></script>
+<script>
+    todoService.listAll(layoutService.listLayout);
+    todoService.getOneToDo(3, layoutService.todoLayout);
+</script>
+</html>

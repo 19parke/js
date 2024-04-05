@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>애니메이션</title>
+    <style>
+        #menu{
+            width:100px;
+            height:0;
+            opacity:0;
+            background-color: lightgoldenrodyellow;
+            transition: all 0.5s
+        }
+    </style>
+</head>
+<body>
+    <input type="checkbox" id="check" style="display: none;">
+    <label for="check">
+        <div>대주제</div>
+    </label>
+    <div id="menu">소주제</div>
+</body>
+<script>
+    const checkbox = document.querySelector("#check");
+    const menu = document.getElementById("menu");
+
+    checkbox.addEventListener("change", (e)=>{
+        // 대주제를 클릭했을 때와 같은 말
+        // alert("들어옴!");
+        if(e.target.checked){
+            menu.animate({
+                height: '100px',
+                opacity: '100%'
+            }, {
+                duration: 200, // 0.2초 
+                fill: 'forwards'
+            });
+        }else{
+            menu.animate({
+                height: '0',
+                opacity: '0'
+            }, {
+                duration: 200,
+                fill: 'forwards'
+            });
+
+        }
+    });
+</script>
+</html>

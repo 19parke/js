@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>이벤트 위임 실습</title>
+        <style>
+            #container {
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+                width: 600px;
+                height: 600px;
+                background-color: gainsboro;
+                margin: 0 auto;
+            }
+            div.box1, div.box2 {
+                width: 200px;
+                height: 200px;
+                background-color: lightgray;
+                text-align: center;
+                line-height: 200px;
+            }
+            div.box1.color{
+                background-color: blueviolet;
+            }
+            div.box2.color{
+                background-color: honeydew;
+            }
+
+
+        </style>
+    </head>
+    <body>
+        <div id="container"></div>
+    </body>
+    <script>
+        // 박스 1을 눌렀을 때 , toggle()을 사용해서, 
+        // 배경색을 변경 혹은 원래 배경색으로 변경을 진행한다.
+        // 다른 것을 눌렀을 때에는 아무런 변화가 없어야 한다. 
+
+        // container 가져오기
+        const container = document.getElementById("container");
+        // container안에 자식으로 할 태그 추가해주기 
+        container.innerHTML = `
+            <div class="box1">박스1</div>
+            <div class="box2">박스2</div>
+        `;
+
+        // container에 이벤트 추가, 자동으로 자식인 태그들도 위임이 된다.
+        container.addEventListener("click", (e)=>{ //event 객체가 꼭 있어야 자식 간에 구분을 할 수 있다. 
+             console.log(e.target); //box1을 클릭하면 box1이 box2를 클릭하면 box2가 container 전체부분을 클릭하면 전체부분이 출력된다.
+            // event객체 중 classList 안 box1을 가지는 class가 있다면
+            if(e.target.classList.contains('box1') || e.target.classList.contains('box2')){
+                e.target.classList.toggle("color"); // 색을 바꿔준다. 색이 없을 때는 입혀주고 있을 때는 없애준다.
+            }
+        })
+    </script>
+</html>

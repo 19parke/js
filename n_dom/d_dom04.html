@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS 선택자로 선택</title>
+</head>
+<body>
+    <h1>CSS 선택자로 선택</h1>
+    <p>갖고 싶은 위시 리스트</p>
+    <ul>
+        <li>맥북</li>
+        <li>헤드셋</li>
+        <li>기계식 키보드</li>
+        <li>아파트</li>
+        <li>레인지 로버</li>
+        <li>아이맥</li>
+    </ul>
+</body>
+<script>
+    // ul 안의 자식 가지고 오기
+    const items = document.querySelectorAll("ul li");
+    console.log(items);
+    // 내용에 "맥"이 포함되어 있으면, 글자 색상을 pink로 변경
+    items.forEach((item)=>{
+        if(item.innerText.includes("맥")){
+            item.style.color = "pink"
+        }
+    });
+</script>
+</html>
+
+<!-- 
+    알고리즘 짜기
+    1. 내용 가져오기
+    2. "아" 검사
+    3. 글자색 변경
+ -->

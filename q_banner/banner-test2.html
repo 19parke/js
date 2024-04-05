@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>배너 만들기2</title>
+    <link rel="stylesheet" href="banner-test2.css">
+</head>
+<body>
+    <section class="container">
+        <div class="banner">
+            <div>
+                <img src="https://cdn.wadiz.kr/ft/images/green001/2024/0318/20240318134219588_7746.png/wadiz/resize/2100/format/jpg/quality/85/&quot">
+            </div>
+            <div>
+                <img src="https://cdn.wadiz.kr/ft/images/green001/2024/0312/20240312165136659_7746.jpg/wadiz/resize/2100/format/jpg/quality/85/&quot">
+            </div>
+            <div>
+                <img src="https://cdn.wadiz.kr/ft/images/green001/2024/0315/20240315143029281_7746.png/wadiz/resize/2100/format/jpg/quality/85/&quot">
+            </div>
+            <div>
+                <img src="https://cdn.wadiz.kr/ft/images/green001/2024/0318/20240318091811085_7746.jpg/wadiz/resize/2100/format/jpg/quality/85/&quot">
+            </div>
+            <div>
+                <img src="https://cdn.wadiz.kr/ft/images/green001/2023/0823/20230823135610480_7746.png/wadiz/resize/2100/format/jpg/quality/85/&quot">
+            </div>
+            <div>
+                <img src="https://cdn.wadiz.kr/ft/images/green001/2024/0318/20240318131621269_7746.png/wadiz/resize/2100/format/jpg/quality/85/&quot">
+            </div>
+            <div>
+                <img src="https://cdn.wadiz.kr/ft/images/green001/2024/0318/20240318092221197_7746.jpg/wadiz/resize/2100/format/jpg/quality/85/&quot">
+            </div>
+        </div>
+    </section>
+</body>
+<script>
+    const lastBanner = document.createElement("div");
+    const banner = document.querySelector("div.banner");
+    let count = 0;
+
+    lastBanner.innerHTML = `<img src="https://cdn.wadiz.kr/ft/images/green001/2024/0318/20240318134219588_7746.png/wadiz/resize/2100/format/jpg/quality/85/&quot">`
+    banner.appendChild(lastBanner);
+
+    setInterval(()=>{
+        // 문제 : 6번으로 넘어가자마자 바로 7번으로 넘어가는데 슬라이드 효과도 없이 급하게 넘어간다.
+        // 수정! count++가 먼저 나와야 한다. 
+        // 이유 : 밑에 있으면 일단 첫번째로 -2880*0이 되어서 첫 슬라이드가 더 오래 보여진다
+        count++;
+        banner.style.transform = `translate(${(-2880)*count}px)`;
+        banner.style.transition = `transform 0.5s`;
+        // count++; 여기에 넣었을 때 문제
+
+        // 7개의 사진, + 1개 추가 index 0~7
+
+        if(count===7){
+            setTimeout(()=>{
+                banner.style.transform = `translate(0px)`;
+                banner.style.transition = `transform 0s`;
+            }, 500)
+            
+            count = 0;
+        }
+    }, 3000)
+
+</script>
+</html>

@@ -1,0 +1,76 @@
+<!--
+    DOM(Document Object Model)
+
+    HTML 태그들을 하나씩 객체화 한 것. 
+    HTML 페이지의 내용과 모양을 제어하기 위해서 사용되는 객체이다. 
+    HTML 태그 당 DOM 객체가 하나씩 생성된다. 
+    HTML 태그의 포함 관계에 따라서 부모, 자식, 형제자매 관계로 구성된다. 
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>클래스 이름 선택</title>
+</head>
+<body>
+    <h1>클래스 이름 선택</h1>
+    <ul>
+        <li class="odd item">첫 번째 아이템이예요!</li>
+        <li class="even item">두 번째 아이템이예요!</li>
+        <li class="odd item">세 번째 아이템이예요!</li>
+        <li class="even item">네 번째 아이템이예요!</li>
+        <li class="odd item">다섯 번째 아이템이예요!</li>
+    </ul>
+        <!-- <li class="odd item" style="color:red">다섯 번째 아이템이예요!</li> -->
+<!--
+     ***[ 중요 ]*** 그 동안 태그에서 쓸 수 있었던 모든 속성들이 [ property ] 이다 
+        style 이 property
+        style 안에 있는 color는 style의 property
+
+-->
+</body>
+<script>
+    // 모든 HTMLCollection 객체에 쓸 것임. 
+
+    // ***[ 중요 ]*** 모든 객체가 공유하는 문법 prototype
+    // prototype은 모든 HTMLCollection 객체들이 사용할 수 있는 공용
+    
+    // HTMLCollection에는 원래 forEach가 없었는데 그래서 새롭게 선언한다. 
+    // 없었던 것을 (forEach)새롭게 추가하고 프로퍼티에 property에 Array에 있는 forEach function을 넣는다.
+    // 내가 만들 필요 없이 만들어진 것을 넣는 것이다. ===> 그래서 HTMLCollection에서 forEach를 만들 수 있게 된다. 
+
+    // HTMLCollection에서 prototype을 사용했다는 것은 모든 이 타입의 객체에 forEach가 생기게끔 만들어주는 것
+    //         저장공간                        값
+    // HTMLCollection.prototype.forEach = Array.prototype.forEach;
+    // const odd_list = document.getElementsByClassName("odd");    //꼭 const (DOM객체는)
+    // console.log(odd_list);
+
+    // odd_list.forEach((odd)=>{
+    //     // console.log(odd);
+    //     odd.style.color = 'green';
+    // });
+    // odd_list가 HTMLCollection 타입이니까 forEach가 생긴것이다. 
+    // HTMLCollection(3) 이름 뒤에 () 앞글자 대문자==> 생성자 임을 알아야 한다. 
+
+    // 짝수 (even) 다 가져와서 글자색 red로 변경
+    // const even_list = document.getElementsByClassName("even");
+    // HTMLCollection.prototype.forEach = Array.prototype.forEach
+    // even_list.forEach((even)=>{
+    //     even.style.color = 'red';
+    // })
+
+    // [ 방법 2 ]
+    // className 은 class의 속성 값을 가져온다.
+    const items = document.getElementsByClassName("item");
+    HTMLCollection.prototype.forEach = Array.prototype.forEach
+    items.forEach((item)=>{
+        // classList는 class의 속성 값을 공백으로 구분한 list를 가져온다.
+        item.style.color = item.classList[0] === "odd" ? "green" : "red";
+        
+        // item.style.color = item.className.includes("odd") ? "green" : "red";
+    })
+
+
+</script>
+</html>

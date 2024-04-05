@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>속성 선택 실습</title>
+</head>
+<body>
+    <form action="" name="login">
+        <input type="text" name="email">
+        <input type="password" name="password">
+        <div>
+            <label>
+                <input type="checkbox" name="save-id" value="">
+                아이디 저장
+            </label>
+        </div>
+    </form>
+</body>
+<script>
+    // 이메일과 비밀번호 유효성 검사 진행
+    // if(!document.password){
+    //     alert("비밀번호를 입력해주세요!")
+    // }
+    
+    // if(!document.email){
+    //     alert("이메일을 입력해주세요!")
+    // }
+
+    //OR
+
+    /*
+        document.login[email].value
+        document.login[password].value 이용
+    */
+
+    // 아이디 저장을 처음부터 체크로 설정
+    // const saveId = document.login['save-id'];
+    // saveId.checked = true;
+
+    const email = document.login.email;
+    const password = document.login.password;
+    const checkId = document.getElementsByName("save-id"); 
+    const saveId = document.login['save-id']; //단일 요소 직접 참조
+
+    if(!email.value){
+        console.log("이메일을 입력하세요!")
+    }
+
+    if(!password.value){
+        console.log("비밀번호를 입력하세요!")
+    }
+
+    saveId.checked = true; //얘는 되는데
+    checkId.checked = true;//얘는 안되는 이유 : 
+
+    // document.getElementsByName("save-id")가 요소의 배열(정확히는 NodeList)을 반환
+    // 단일 요소가 아닌 여러 요소를 포함하는 NodeList 객체를 반환
+    // checked 속성을 배열에 직접 적용할 수 없다
+    // checkId가 NodeList, 특정 요소에 접근하려면 인덱스 사용
+    // checkId[0].checked = true;
+
+
+</script>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=
+    , initial-scale=1.0">
+    <title>종합 실습 02 - detailMy</title>
+    <style>
+        table, div{
+            width:800px;
+            margin:0 auto;
+            border: 1px solid gray;
+            border-collapse: collapse;
+        }
+
+        div{
+            text-align: center;
+        }
+
+        input {
+            width:130px;
+        }
+        
+        td, th {
+            border: 1px solid gray;
+        }
+
+        #go-list{
+            display:none;
+        }
+    </style>
+</head>
+<body>
+    <button id="list-button">게시글 가져오기</button>
+    <button id="write-button">게시글 추가하기</button>
+    <button id="go-list">목록으로</button>
+    <div>
+        <input type="text" id="userId" placeholder="회원ID">
+        <input type="text" id="id" placeholder="ID">
+        <input type="text" id="title" placeholder="제목">
+        <input type="text" id="body" placeholder="내용">
+    </div>
+    <table class="post-table">
+        <thead>
+            <tr>
+                <th>userId</th>
+                <th>id</th>
+                <th>title</th>
+                <th>body</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</body>
+<script src="service02_ver1.js"></script>
+<script src="layout02_ver1.js"></script>
+<script>
+    // 데이터 가져오기 button 가져오기
+    const listButton = document.getElementById("list-button");
+    // 데이터 추가하기 button 가져오기
+    const writeButton = document.getElementById("write-button");
+    const tbody = document.querySelector("table.post-table tbody");
+    const goListButton = document.getElementById("go-list");
+
+    const goListButtonClickEvent = async (e) =>{
+        e.target.style.display = "none";
+
+        // 전체목록 
+        const text = await postService.getAll(postLayout.showPostList);
+
+        tbody.innerHTML = text;
+    }
+
+    // click했을 때 어떤 행동이 실행되기를 원하는지 하나의 함수로 만들기
+    const listButtonClickEvent = async (e)=>{
+        const text = await postService.getAll(postLayout.showPostList);
+        tbody.innerHTML = text;
+        // postService.getAll(postLayout.showPostList);
+
+        tbody.addEventListener("click", async(e)=>{
+            e.preventDefault();
+            if(e.target.classList[0] === 'go-detail'){
+                const id = e.target.getAttribute("href");
+                goListButton.style.display = "inline-block";
+                tbody.innerHTML = await postService.read(id, postLayout.showPost);
+                // console.log(e.target.href);
+                // console.log(e.target.getAttribute("href"));
+            }
+        })
+    };
+
+    const writeButtonClickEvent = async(e)=>{
+        // 사용자가 화면에 입력한 새 게시글 정보 가져오기
+        const userId = document.getElementById("userId").value;
+        const id = document.getElementById("id").value;
+        const title= document.getElementById("title").value;
+        const body = document.getElementById("body").value;
+
+        // 객체화
+        const createdPost = {
+            userId : userId, 
+            id: id, 
+            title: title,
+            body: body
+        }
+
+        // 서버에 전달해서 게시글을 추가하고, 
+        // 새롭게 추가된 게시글 정보를 tr태그 문자열 값으로 전달받는다.
+        const newPost = await postService.createPost(createdPost, postLayout.showCreatedPost);
+
+        // 전체 목록
+        const text = await postService.getAll(postLayout.showPostList);
+
+        // 화면 출력
+        tbody.innerHTML = text;
+        // 그 뒤에 새롭게 추가된, 가져온 게시글 출력
+        tbody.innerHTML += newPost;
+    }
+
+    // 리팩토링
+    listButton.addEventListener("click", listButtonClickEvent);
+    writeButton.addEventListener("click", writeButtonClickEvent);
+    goListButton.addEventListener("click", goListButtonClickEvent);
+</script>
+</html>

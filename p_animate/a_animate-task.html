@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>애니메이션 실습</title>
+</head>
+<style>
+    div.left{
+        width:0px;
+        height:0px;
+    }
+    div.right{
+        width:0px;
+        height:0px;
+        overflow: hidden;
+    }
+    
+    
+</style>
+<body>
+    <div id="wrap">
+        <div class="left">
+            <img id="first" src="./glass.png">
+        </div>
+        <div class="right">
+            <img id="second" src="./noglass.png">
+        </div>
+    </div>
+    
+
+</body>
+<script>
+    const wrap = document.querySelector("#wrap");
+    const first = document.getElementById("first");
+    const second = document.getElementById("second");
+
+    wrap.addEventListener("click", (e)=>{
+        if(e.target.click){
+            // alert("Click!");
+            second.animate({
+                weight: '100px'
+
+            }, {
+                duration: 300,
+            })
+        }else{
+
+        }
+    })
+    
+</script>
+</html>
+
+<!-- 
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>애니메이션 실습</title>
+        <style>
+            #container {
+                position: relative;
+                width: 300px;
+                height: 300px;
+                margin: 0 auto;
+                overflow: hidden;
+            }
+
+            div.action1,
+            div.action2 {
+                position: absolute;
+                height: 300px;
+                background-size: 100% 100%;
+            }
+
+            div.action1 {
+                width: 300px;
+                background-image: url("./action1.png");
+            }
+
+            div.action2 {
+                width: 300px;
+                left: 300px;
+                background-image: url("./action2.png");
+            }
+        </style>
+    </head>
+    <body>
+        <input type="checkbox" id="check" style="display: none" />
+        <div id="container">
+            <label for="check">
+                <div class="action1 action"></div>
+                <div class="action2 action"></div>
+            </label>
+        </div>
+    </body>
+    <script>
+        const input = document.getElementById("check");
+        const actions = document.querySelectorAll("div.action");
+
+        input.addEventListener("change", (e) => {
+            const checked = e.target.checked;
+            const options = {duration: 100, fill: "forwards"}
+            const styles = {
+                0: {width: checked ? "0" : "300px"},
+                1: {left: checked ? "0" : "300px"}
+            }
+
+            actions[Number(checked)].animate(styles[Number(checked)], options);
+            actions[Number(!checked)].animate(styles[Number(!checked)], options);
+        });
+    </script>
+</html>
+
+ -->

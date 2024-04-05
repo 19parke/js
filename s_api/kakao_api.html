@@ -1,0 +1,53 @@
+<!-- 
+    라이브러리 : 기존 프로젝트에 일부분으로 활용할 수 있는 작은 단위(편의성, 유틸)
+    API(Application Programming Interface) : 기존 프로젝트에 많은 부분으로 활용할 수 있는 묶음 단위
+    프레임워크(Framework) : 프레임워크에서 원하는 API를 골라서 적용 후 작업 진행 가능
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>카카오맵 API</title>
+</head>
+<body>
+    <div id="map" style="width:500px;height:400px;"></div>
+</body>
+<script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=c6a8ba0db74fab7556fcb06d7342149e"></script>
+<script>
+    // 지도를 표시할 div
+    // id가 map인 div태그 가져오기
+    let mapContainer = document.getElementById('map'),  
+    // mapOption이라는 객체 생성(속성은 center와 level)
+    mapOption = { 
+        // LatLng이라는 프로토타입을 새 객체(new)로 생성, 매개변수로는 위도 경도 전달
+        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };
+
+    // Map이라는 프로토타입을 새 객체로 생성, 매개변수로는 가져온 div태그인 mapContainer와 지도의 설정인 mapOption을 전달
+    let map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+    // 마커가 표시될 위치입니다 
+    // 마커를 표시할 변수 생성, 그리고 그 안에 위도 경도를 전달하는 LatLng프로토타입 객체 생성
+    // 즉 마커의 위치를 담아줄 변수 생성
+    let markerPosition  = new kakao.maps.LatLng(33.450701, 126.570667); 
+
+    // 마커를 생성합니다
+    // 실제 마커 생성, Marker라는 프로토타입 객체 새로 생성하고 
+    // 매개변수로 객체를 전달해주는데 속성의 key값은 position으로
+    // value는 위에서 만들어준 마커의 위치 전달
+    let marker = new kakao.maps.Marker({
+        position: markerPosition
+    });
+
+    // 마커가 지도 위에 표시되도록 설정합니다
+    // 마커를 생성해준 변수 에서 setMap함수 사용
+    // 매개변수로 실제로 생성한 map전달
+    marker.setMap(map);
+
+    // 아래 코드는 지도 위의 마커를 제거하는 코드입니다
+    // marker.setMap(null);    
+</script>
+</html>

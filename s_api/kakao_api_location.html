@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>주소로 장소 표시하기</title>
+</head>
+<body>
+    <p style="margin-top:-12px">
+        <em class="link">
+            <a href="javascript:void(0);" onclick="window.open('http://fiy.daum.net/fiy/map/CsGeneral.daum', '_blank', 'width=981, height=650')">
+                혹시 주소 결과가 잘못 나오는 경우에는 여기에 제보해주세요.
+            </a>
+        </em>
+    </p>
+    <div id="map" style="width:100%;height:350px;"></div>
+</body>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c6a8ba0db74fab7556fcb06d7342149e&libraries=services"></script>
+<script>
+    /*
+    원하는 지번 또는 도로명 주소의
+    경도와 위도 알아내기
+
+    해당 경도와 위도로 아래 작업하기
+    1. 지도 중앙
+    2. 마커 생성
+    */
+
+
+    let mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = {
+        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };  
+
+    // 지도를 생성합니다    
+    let map = new kakao.maps.Map(mapContainer, mapOption);
+    
+    // 주소-좌표 변환 객체를 생성합니다
+    // Geocoder라는 새 프로토타입 객체 생성해서 geocoder 변수에 담아주기
+    let geocoder = new kakao.maps.services.Geocoder();
+    let addresses = [
+    '경기도 안양시 관악대로 135', 
+    '경기도 안양시 관악대로 155', 
+    ]
+
+    // 주소로 좌표를 검색합니다
+    // 변환 객체가 담긴 geocoder라는 변수에서 addressSearch 함수 호출
+    // 매개변수로 ' 주소 ' 전달, 
+    // 함수 전달: 매개변수는 result와 status
+    for(let i=0; i<addresses.length; i++){
+
+        geocoder.addressSearch(
+            addresses[i], 
+            function(result, status) {
+
+            // 정상적으로 검색이 완료됐으면 
+            // status가 OK와 같으면
+            if (status === kakao.maps.services.Status.OK) {
+
+                // 좌표 담기
+                // coords안에 LatLng 프로토타입 객체 생성, 매개변수 (경도, 위도)전달
+                // result배열의 0번째 값의 y는 경도
+                // result배열의 0번째 값의 x는 위도
+                let coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+                // 결과값으로 받은 위치를 마커로 표시합니다
+                // Marker프로토타입 객체를 새로 만들며 마커 생성
+                // 생성하면서 매개변수를 통해 객체를 전달하는데 해당 객체에 
+                // 알아낸 위치의 좌표전달과(position : coords), 위에서 생성한 지도전달(map:map)
+                let marker = new kakao.maps.Marker({
+                    map: map,
+                    position: coords
+                });
+
+                // 인포윈도우로 장소에 대한 설명을 표시합니다
+                // InfoWindow라는 프로토타입 객체 생성, 매개변수로 객체 전달
+                // 매개변수는 안에 들어갈 내용 div태그
+                // let infowindow = new kakao.maps.InfoWindow({
+                //     content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
+                // });
+                // infowindow.open(map, marker);
+
+                // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+                map.setCenter(coords);
+            } 
+        });    
+    }
+</script>
+</html>
